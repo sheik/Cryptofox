@@ -1,9 +1,10 @@
 {
-  "name": "cryptofox",
-  "fullName": "Cryptofox",
-  "description": "GPG for firefox",
-  "author": "Jeff Aigner",
-  "license": "MPL 1.1/GPL 2.0/LGPL 2.1",
-  "icon": "lock.png",
-  "version": "0.1"
+    "name": "cryptofox", 
+    "license": "MPL 1.1/GPL 2.0/LGPL 2.1", 
+    "author": "Jeff Aigner", 
+    "description": "GPG for firefox", 
+    "version": "0.1", 
+    "fullName": "Cryptofox", 
+    "id": "jid1-df1wWk88aUoP6Q", 
+    "icon": "lock.png"
 }
