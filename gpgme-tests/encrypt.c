@@ -1,7 +1,3 @@
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -10,8 +6,7 @@
 
 #include "t-support.h"
 
-int 
-main (int argc, char *argv[])
+int main (int argc, char *argv[])
 {
   gpgme_ctx_t ctx;
   gpgme_error_t err;
@@ -31,7 +26,7 @@ main (int argc, char *argv[])
   err = gpgme_data_new (&out);
   fail_if_err (err);
 
-  // my key (jeff@grid32.com
+  // my key (jeff@grid32.com)
   err = gpgme_get_key (ctx, "3092E1F07FD60C4AF7DCC04EC5B70FF2C35F1F8E",
 		  &key[0], 0);
   fail_if_err (err);
