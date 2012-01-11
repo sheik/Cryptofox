@@ -1,0 +1,3 @@
+#!/bin/sh
+
+gcc `gpgme-config --libs --cflags` encrypt.c -o encrypt.out
