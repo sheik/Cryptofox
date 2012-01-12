@@ -1,1 +1,1 @@
-void test_lib(const char *message, const char *fingerprint);
+void test_lib(const char *message, char *dest, const char *fingerprint);
