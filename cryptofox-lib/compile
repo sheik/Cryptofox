@@ -1,0 +1,4 @@
+#!/bin/sh
+
+gcc -D_FILE_OFFSET_BITS=64 -m32 `gpgme-config --libs --cflags` -c -fPIC cryptofox.c -o cryptofox.o
+gcc -D_FILE_OFFSET_BITS=64 -m32 `gpgme-config --libs --cflags` -shared -Wl,-soname,libcryptofox.so.1 -o libcryptofox.so.1.0.1 cryptofox.o
