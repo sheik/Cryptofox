@@ -11,7 +11,7 @@ int main (int argc, char *argv[])
 	gpgme_ctx_t ctx;
 	gpgme_error_t err;
 	gpgme_data_t in, out;
-	gpgme_key_t key[3] = { NULL, NULL, NULL };
+	gpgme_key_t key[2] = { NULL, NULL };
 	gpgme_encrypt_result_t result;
 
 	init_gpgme (GPGME_PROTOCOL_OpenPGP);
@@ -27,13 +27,13 @@ int main (int argc, char *argv[])
 	fail_if_err (err);
 
 	// my key (jeff@grid32.com)
-	err = gpgme_get_key (ctx, "3092E1F07FD60C4AF7DCC04EC5B70FF2C35F1F8E",
+	err = gpgme_get_key (ctx, "D6A02D995D78918B2FEA449799135DF6B3D2EBA0",
 			&key[0], 0);
 	fail_if_err (err);
 
-	err = gpgme_get_key(ctx,"C0C13F91F6F111E8C66CA6E518A66F16FBFD6A72",
-			&key[1], 0);
-	fail_if_err (err);
+//	err = gpgme_get_key(ctx,"C0C13F91F6F111E8C66CA6E518A66F16FBFD6A72",
+//			&key[1], 0);
+//	fail_if_err (err);
 
 	err = gpgme_op_encrypt (ctx, key, GPGME_ENCRYPT_ALWAYS_TRUST, in, out);
 	fail_if_err (err);
@@ -47,7 +47,6 @@ int main (int argc, char *argv[])
 	print_data (out);
 
 	gpgme_key_unref (key[0]);
-	gpgme_key_unref (key[1]);
 	gpgme_data_release (in);
 	gpgme_data_release (out);
 	gpgme_release (ctx);

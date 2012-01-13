@@ -6,11 +6,13 @@
 
 #include "t-support.h"
 
-void test_lib(const char *message, char *dest, const char *fingerprint)
+gpgme_data_t out;
+
+void encrypt(const char *message, char *dest, const char *fingerprint)
 {
 	gpgme_ctx_t ctx;
 	gpgme_error_t err;
-	gpgme_data_t in, out;
+	gpgme_data_t in;
 	gpgme_key_t key[2] = { NULL, NULL };
 	gpgme_encrypt_result_t result;
 
@@ -44,32 +46,30 @@ void test_lib(const char *message, char *dest, const char *fingerprint)
 				result->invalid_recipients->fpr);
 		exit (1);
 	}
-//	print_data (out);
 
-#define BUF_SIZE 512
-    char buf[BUF_SIZE + 1];
     int ret;
-    int count = 0;
-    int i,j;
-    i = j = 0;
-    strcpy(dest,"");
-
-    ret = gpgme_data_seek (out, 0, SEEK_SET);
-    if (ret)
-        fail_if_err (gpgme_err_code_from_errno (errno));
-    while ((ret = gpgme_data_read (out, buf, BUF_SIZE)) > 0) {
-        fwrite (buf, ret, 1, stdout);
-        for(i = 0; i < ret; ++j,++i) {
-            dest[j] = buf[i];
-        }
-    }
-    dest[j] = '\0';
-    if (ret < 0)
-        fail_if_err (gpgme_err_code_from_errno (errno));
-
+    ret = gpgme_data_seek(out, 0, SEEK_SET);
+    if(ret)
+        fail_if_err(gpgme_err_code_from_errno(errno));
 
 	gpgme_key_unref (key[0]);
 	gpgme_data_release (in);
-	gpgme_data_release (out);
 	gpgme_release (ctx);
+}
+
+int read_data(char *buf, int buf_size) {
+    int ret;
+    strcpy(buf,"");
+
+    if((ret = gpgme_data_read(out, buf, buf_size)) > 0)
+        buf[ret] = '\0';
+
+    if(ret < 0)
+        fail_if_err(gpgme_err_code_from_errno(errno));
+
+    return (ret > 0 ? 1: 0);
+}
+
+void free_data() {
+    gpgme_data_release(out);
 }

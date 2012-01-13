@@ -1,3 +1,4 @@
 #!/bin/sh
 
 gcc -D_FILE_OFFSET_BITS=64 -m32 `gpgme-config --libs --cflags` encrypt.c -o encrypt.out
+gcc -D_FILE_OFFSET_BITS=64 -m32 `gpgme-config --libs --cflags` keylist.c -o keylist.out
