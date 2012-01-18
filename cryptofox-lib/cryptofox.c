@@ -67,9 +67,11 @@ int read_data(char *buf, int buf_size) {
     if(ret < 0)
         fail_if_err(gpgme_err_code_from_errno(errno));
 
-    return (ret > 0 ? 1: 0);
+    if(ret > 0) {
+        return 1;
+    } else {
+        gpgme_data_release(out);
+        return 0;
+    }
 }
 
-void free_data() {
-    gpgme_data_release(out);
-}
